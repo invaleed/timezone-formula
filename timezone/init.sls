@@ -7,8 +7,8 @@
 
 timezone_setting:
   timezone.system:
-    - name: {{ timezone.name }}
-    - utc: {{ timezone.utc }}
+    - name: {{ timezone }}
+    - utc: {{ utc }}
 
 {%- if grains.os not in ('MacOS', 'Windows') %}
 
@@ -19,7 +19,7 @@ timezone_packages:
 timezone_symlink:
   file.symlink:
     - name: {{ timezone.path_localtime }}
-    - target: {{ timezone.path_zoneinfo }}{{ timezone.name }}
+    - target: {{ timezone.path_zoneinfo }}{{ timezone }}
     - force: true
     - require:
       - pkg: {{ timezone.pkg.name }}
